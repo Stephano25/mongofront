@@ -1,4 +1,4 @@
-<div *ngFor="let board of vm.boards$ | async">
-{{ board.title }}
+<div *ngIf="board">
+    <h2>{{ board.title }}</h2>
+    <app-lists [boardId]="board._id"></app-lists>
 </div>
-<app-lists [boardId]="board._id"></app-lists>
