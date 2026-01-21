@@ -1,3 +1,4 @@
 <div *ngFor="let board of vm.boards$ | async">
 {{ board.title }}
 </div>
+<app-lists [boardId]="board._id"></app-lists>
