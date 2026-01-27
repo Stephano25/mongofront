@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs'; // ✅ Import manquant
 import { BoardService } from './board.service';
-
 
 @Injectable()
 export class BoardViewModel {
-    boards$;
+  board$!: Observable<any>;
 
-    constructor(private service: BoardService) {
-        this.boards$ = this.service.getBoards();
-    }
+  constructor(private service: BoardService) {}
+
+  loadBoard(id: string) {
+    this.board$ = this.service.getBoardById(id);
+  }
 }
