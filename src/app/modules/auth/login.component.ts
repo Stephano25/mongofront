@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../core/services/auth.service';
-import { Router } from '@angular/router'
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -11,17 +11,16 @@ import { Router } from '@angular/router'
   template: `
     <h2>Login</h2>
     <form (ngSubmit)="login()">
-        <input [(ngModel)]="email" name="email" placeholder="Email" required />
-        <input [(ngModel)]="password" name="password" type="password" placeholder="Password" required />
-        <button type="submit">Login</button>
+      <input [(ngModel)]="email" name="email" placeholder="Email" required />
+      <input [(ngModel)]="password" name="password" type="password" placeholder="Password" required />
+      <button type="submit">Login</button>
     </form>
 
     <p>
-        Pas encore inscrit ?
-        <button (click)="goToRegister()">Créer un compte</button>
+      Pas encore inscrit ?
+      <button (click)="goToRegister()">Créer un compte</button>
     </p>
-`
-
+  `
 })
 export class LoginComponent {
   email = '';
@@ -30,10 +29,16 @@ export class LoginComponent {
   constructor(private auth: AuthService, private router: Router) {}
 
   login() {
-    this.auth.login(this.email,  this.password).subscribe(res => {
+    this.auth.login(this.email, this.password).subscribe(res => {
       localStorage.setItem('token', res.access_token);
-      alert('Logged in!');
+
+      // 👉 Ici tu peux récupérer l’ID du board par défaut
+      // Pour l’exemple, on redirige vers le premier board (id fictif)
+      this.router.navigate(['/boards', 'defaultBoardId']);
     });
   }
-  goToRegister() { this.router.navigate(['/register']); }
+
+  goToRegister() {
+    this.router.navigate(['/register']);
+  }
 }

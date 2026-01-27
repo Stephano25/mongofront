@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../core/services/auth.service';
-import { Router } from '@angular/router'
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -21,7 +21,6 @@ import { Router } from '@angular/router'
       <button (click)="goToLogin()">Se connecter</button>
     </p>
   `
-
 })
 export class RegisterComponent {
   email = '';
@@ -32,7 +31,11 @@ export class RegisterComponent {
   register() {
     this.auth.register(this.email, this.password).subscribe(() => {
       alert('User registered!');
+      this.router.navigate(['/login']);
     });
   }
-  goToLogin() { this.router.navigate(['/login']); }
+
+  goToLogin() {
+    this.router.navigate(['/login']);
+  }
 }
