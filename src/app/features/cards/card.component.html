@@ -1,6 +1,6 @@
 <div
   cdkDropList
-  [cdkDropListData]="vm.cards$ | async"
+  [cdkDropListData]="(vm.cards$ | async) || []"
   class="card-list"
   (cdkDropListDropped)="drop($event)"
 >

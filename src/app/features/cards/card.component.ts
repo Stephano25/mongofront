@@ -2,13 +2,13 @@ import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { CardViewModel } from './card.viewmodel';
-import { CardService } from './card.service';
-import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { CardModel, CardService } from './card.service';
+import { CdkDragDrop, DragDropModule, moveItemInArray } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-cards',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, DragDropModule],
   templateUrl: './card.component.html',
   styleUrls: ['./card.component.css'],
   providers: [CardViewModel]
@@ -31,8 +31,12 @@ export class CardComponent implements OnInit {
       });
     }
   }
-  drop(event: CdkDragDrop<any[]>) {
-    const cards = event.container.data;
+
+  drop(event: CdkDragDrop<CardModel[]>) {
+    const cards = event.container.data ?? []; // ✅ évite null
     moveItemInArray(cards, event.previousIndex, event.currentIndex);
+
+    // TODO : appeler le backend pour sauvegarder l’ordre
+    // this.service.updateCardPositions(this.listId, cards).subscribe();
   }
 }
