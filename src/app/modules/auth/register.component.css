@@ -1,0 +1,43 @@
+.register-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: #f4f5f7;
+}
+
+.register-container h2 {
+  margin-bottom: 1rem;
+  color: #172b4d;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  width: 300px;
+}
+
+input {
+  padding: 0.6rem;
+  border: 1px solid #dfe1e6;
+  border-radius: 3px;
+}
+
+button {
+  background: #5aac44;
+  color: white;
+  border: none;
+  padding: 0.6rem;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #519839;
+}
+
+p {
+  margin-top: 1rem;
+}

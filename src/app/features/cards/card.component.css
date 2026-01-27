@@ -1,0 +1,43 @@
+.card-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.card {
+  background: #fff;
+  border-radius: 3px;
+  padding: 0.5rem;
+  box-shadow: 0 1px 0 rgba(9,30,66,.25);
+  cursor: grab;
+}
+
+.card:hover {
+  background: #f0f0f0;
+}
+
+form {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+input {
+  flex: 1;
+  padding: 0.4rem;
+  border: 1px solid #dfe1e6;
+  border-radius: 3px;
+}
+
+button {
+  background: #0079bf;
+  color: white;
+  border: none;
+  padding: 0.4rem 0.8rem;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #026aa7;
+}

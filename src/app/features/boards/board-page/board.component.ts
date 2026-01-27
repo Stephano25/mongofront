@@ -2,14 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { BoardViewModel } from './board.viewmodel';
-import { BoardService } from './board.service';
 import { ListComponent } from '../../lists/list.component';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-board',
   standalone: true,
-  imports: [CommonModule, ListComponent],
+  imports: [CommonModule, ListComponent, DragDropModule],
   templateUrl: './board.component.html',
+  styleUrls: ['./board.component.css'],
   providers: [BoardViewModel],
 })
 export class BoardComponent implements OnInit {

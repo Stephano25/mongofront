@@ -9,19 +9,8 @@ import { BoardService } from '../../features/boards/board-page/board.service';
   selector: 'app-login',
   standalone: true,
   imports: [CommonModule, FormsModule],
-  template: `
-    <h2>Login</h2>
-    <form (ngSubmit)="login()">
-      <input [(ngModel)]="email" name="email" placeholder="Email" required />
-      <input [(ngModel)]="password" name="password" type="password" placeholder="Password" required />
-      <button type="submit">Login</button>
-    </form>
-
-    <p>
-      Pas encore inscrit ?
-      <button (click)="goToRegister()">Créer un compte</button>
-    </p>
-  `,
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
   email = '';

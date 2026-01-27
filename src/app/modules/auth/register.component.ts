@@ -8,19 +8,8 @@ import { Router } from '@angular/router';
   selector: 'app-register',
   standalone: true,
   imports: [CommonModule, FormsModule],
-  template: `
-    <h2>Register</h2>
-    <form (ngSubmit)="register()">
-      <input [(ngModel)]="email" name="email" placeholder="Email" required />
-      <input [(ngModel)]="password" name="password" type="password" placeholder="Password" required />
-      <button type="submit">Register</button>
-    </form>
-
-    <p>
-      Déjà inscrit ?
-      <button (click)="goToLogin()">Se connecter</button>
-    </p>
-  `
+  templateUrl: './register.component.html',
+  styleUrls: ['./register.component.css']
 })
 export class RegisterComponent {
   email = '';

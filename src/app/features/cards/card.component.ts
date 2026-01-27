@@ -3,12 +3,14 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { CardViewModel } from './card.viewmodel';
 import { CardService } from './card.service';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-cards',
   standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './card.component.html',
+  styleUrls: ['./card.component.css'],
   providers: [CardViewModel]
 })
 export class CardComponent implements OnInit {
@@ -28,5 +30,9 @@ export class CardComponent implements OnInit {
         this.newCardTitle = '';
       });
     }
+  }
+  drop(event: CdkDragDrop<any[]>) {
+    const cards = event.container.data;
+    moveItemInArray(cards, event.previousIndex, event.currentIndex);
   }
 }
