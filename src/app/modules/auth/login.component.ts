@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../core/services/auth.service';
 import { Router } from '@angular/router';
-import { BoardService } from '../../features/boards/board.service';
 
 @Component({
   selector: 'app-login',
@@ -18,21 +17,15 @@ export class LoginComponent {
 
   constructor(
     private auth: AuthService,
-    private router: Router,
-    private boardService: BoardService
+    private router: Router
   ) {}
 
   login() {
     this.auth.login(this.email, this.password).subscribe(res => {
       localStorage.setItem('token', res.access_token);
 
-      this.boardService.getBoards().subscribe(boards => {
-        if (boards.length > 0) {
-          this.router.navigate(['/boards', boards[0]._id]);
-        } else {
-          this.router.navigate(['/boards']);
-        }
-      });
+      // ✅ après login → redirection directe vers la liste des boards
+      this.router.navigate(['/boards']);
     });
   }
 

@@ -1,18 +1,28 @@
 <div class="board-list">
   <h2>Mes Boards</h2>
 
-  <!-- Formulaire d’ajout -->
-  <form (ngSubmit)="createBoard()" #boardForm="ngForm" class="add-board-form">
+  <!-- Bouton pour afficher/masquer le formulaire d’ajout -->
+  <button (click)="toggleAddForm()" class="add-btn">+ Ajouter un board</button>
+
+  <!-- Formulaire d’ajout affiché seulement si showAddForm = true -->
+  <form *ngIf="showAddForm" (ngSubmit)="createBoard()" #boardForm="ngForm" class="add-board-form">
     <input [(ngModel)]="newBoardTitle" name="title" placeholder="Nom du board" required />
-    <button type="submit" [disabled]="boardForm.invalid">+ Ajouter un board</button>
+    <button type="submit" [disabled]="boardForm.invalid">Créer</button>
   </form>
 
   <!-- Liste des boards -->
   <ul>
     <li *ngFor="let board of boards">
-      <span (click)="open(board._id)" class="board-title">{{ board.title }}</span>
+      <span class="board-title">{{ board.title }}</span>
       <button (click)="open(board._id)" class="open-btn">Ouvrir</button>
+      <button (click)="startRename(board)" class="rename-btn">Renommer</button>
       <button (click)="deleteBoard(board._id)" class="delete-btn">Supprimer</button>
+
+      <!-- Formulaire de renommage inline -->
+      <form *ngIf="board._id === renamingBoardId" (ngSubmit)="renameBoard(board._id)" #renameForm="ngForm" class="rename-board-form">
+        <input [(ngModel)]="renameTitle" name="renameTitle" placeholder="Nouveau nom" required />
+        <button type="submit" [disabled]="renameForm.invalid">Valider</button>
+      </form>
     </li>
   </ul>
 </div>

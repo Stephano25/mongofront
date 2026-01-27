@@ -1,5 +1,5 @@
 .board-list {
-  max-width: 500px;
+  max-width: 600px;
   margin: 2rem auto;
   padding: 1rem;
   background: #f4f5f7;
@@ -15,6 +15,8 @@
 .add-board-form input {
   flex: 1;
   padding: 0.5rem;
+  border: 1px solid #dfe1e6;
+  border-radius: 4px;
 }
 
 .add-board-form button {
@@ -23,6 +25,7 @@
   border: none;
   padding: 0.5rem 1rem;
   border-radius: 4px;
+  cursor: pointer;
 }
 
 ul {
@@ -42,6 +45,17 @@ li {
 
 .board-title {
   cursor: pointer;
+  font-weight: bold;
+}
+
+.open-btn {
+  background: #5aac44;
+  color: white;
+  border: none;
+  padding: 0.3rem 0.6rem;
+  border-radius: 4px;
+  margin-left: 0.5rem;
+  cursor: pointer;
 }
 
 .delete-btn {
@@ -50,4 +64,6 @@ li {
   border: none;
   padding: 0.3rem 0.6rem;
   border-radius: 4px;
+  margin-left: 0.5rem;
+  cursor: pointer;
 }

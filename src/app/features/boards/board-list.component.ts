@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { BoardService } from './board.service';
 import { BoardModel } from './board.model';
+import { AuthService } from '../../core/services/auth.service'; // ✅ import ajouté
 
 @Component({
   selector: 'app-board-list',
@@ -16,7 +17,11 @@ export class BoardListComponent implements OnInit {
   boards: BoardModel[] = [];
   newBoardTitle = '';
 
-  constructor(private service: BoardService, private router: Router) {}
+  constructor(
+    private service: BoardService,
+    private router: Router,
+    private auth: AuthService // ✅ injection ajoutée
+  ) {}
 
   ngOnInit() {
     this.service.getBoards().subscribe((data: BoardModel[]) => {
@@ -31,7 +36,7 @@ export class BoardListComponent implements OnInit {
   createBoard() {
     if (this.newBoardTitle.trim()) {
       this.service.createBoard(this.newBoardTitle).subscribe((board: BoardModel) => {
-        this.boards.push(board); // ✅ ajout instantané
+        this.boards.push(board);
         this.newBoardTitle = '';
         this.router.navigate(['/boards', board._id]);
       });
@@ -41,8 +46,12 @@ export class BoardListComponent implements OnInit {
   deleteBoard(id: string) {
     if (confirm('Supprimer ce board ?')) {
       this.service.deleteBoard(id).subscribe(() => {
-        this.boards = this.boards.filter(b => b._id !== id); // ✅ suppression instantanée
+        this.boards = this.boards.filter(b => b._id !== id);
       });
     }
+  }
+
+  logout() {
+    this.auth.logout(); // ✅ fonctionne maintenant
   }
 }

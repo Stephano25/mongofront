@@ -1,20 +1,43 @@
-form {
+.lists {
+  margin-top: 1rem;
+}
+
+.add-list-form {
   display: flex;
   gap: 0.5rem;
   margin-bottom: 1rem;
 }
 
-form input {
+.add-list-form input {
   flex: 1;
   padding: 0.5rem;
+  border: 1px solid #dfe1e6;
+  border-radius: 4px;
 }
 
-form button {
+.add-list-form button {
   background: #0079bf;
   color: white;
   border: none;
   padding: 0.5rem 1rem;
   border-radius: 4px;
+  cursor: pointer;
+}
+
+.board-lists {
+  display: flex;
+  gap: 1rem;
+}
+
+.list {
+  background: white;
+  padding: 0.5rem;
+  border-radius: 4px;
+  min-width: 200px;
+}
+
+.list h4 {
+  margin: 0 0 0.5rem 0;
 }
 
 .delete-btn {
@@ -23,12 +46,5 @@ form button {
   border: none;
   padding: 0.3rem 0.6rem;
   border-radius: 4px;
-  margin-left: 0.5rem;
-}
-
-.list, .card {
-  background: white;
-  margin-bottom: 0.5rem;
-  padding: 0.5rem;
-  border-radius: 4px;
+  cursor: pointer;
 }

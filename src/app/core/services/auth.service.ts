@@ -1,17 +1,39 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 
-@Injectable({ providedIn: 'root' })
+@Injectable({
+  providedIn: 'root'
+})
 export class AuthService {
-  private api = 'http://localhost:3000/auth';
+  private apiUrl = 'http://localhost:3000/auth'; // ✅ adapte selon ton backend NestJS
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
-  register(email: string, password: string) {
-    return this.http.post(`${this.api}/register`, { email, password });
+  // 🔹 Login
+  login(email: string, password: string): Observable<{ access_token: string }> {
+    return this.http.post<{ access_token: string }>(`${this.apiUrl}/login`, { email, password });
   }
 
-  login(email: string, password: string) {
-    return this.http.post<{ access_token: string }>(`${this.api}/login`, { email, password });
+  // 🔹 Register
+  register(email: string, password: string): Observable<{ message: string }> {
+    return this.http.post<{ message: string }>(`${this.apiUrl}/register`, { email, password });
+  }
+
+  // 🔹 Logout
+  logout(): void {
+    localStorage.removeItem('token');
+    this.router.navigate(['/login']); // ✅ retour vers login
+  }
+
+  // 🔹 Refresh token
+  refreshToken(): Observable<{ access_token: string }> {
+    return this.http.post<{ access_token: string }>(`${this.apiUrl}/refresh`, {});
+  }
+
+  // 🔹 Vérifier si connecté
+  isAuthenticated(): boolean {
+    return !!localStorage.getItem('token');
   }
 }

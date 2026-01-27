@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { BoardViewModel } from './board.viewmodel';
 import { ListComponent } from '../lists/list.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { BoardService } from './board.service';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-board',
@@ -21,10 +20,11 @@ export class BoardComponent implements OnInit {
   newTitle = '';
 
   constructor(
-    public vm: BoardViewModel, 
-    private route: ActivatedRoute, 
+    public vm: BoardViewModel,
+    private route: ActivatedRoute,
     private service: BoardService,
-    private router: Router) {}
+    private router: Router
+  ) {}
 
   ngOnInit() {
     this.route.params.subscribe(params => {
@@ -46,11 +46,12 @@ export class BoardComponent implements OnInit {
     if (confirm('Supprimer ce board ?')) {
       this.service.deleteBoard(this.boardId).subscribe(() => {
         console.log('Board supprimé');
-        this.router.navigate(['/']); // ✅ retour à la liste après suppression
+        this.router.navigate(['/boards']); // ✅ retour vers la liste des boards
       });
     }
   }
-  goBack() { 
-    this.router.navigate(['/']); // ✅ bouton retour 
+
+  goBack() {
+    this.router.navigate(['/boards']); // ✅ bouton retour vers BoardListComponent
   }
 }
