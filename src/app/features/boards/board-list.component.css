@@ -1,6 +1,28 @@
-h2 {
-  font-size: 1.5rem;
+.board-list {
+  max-width: 500px;
+  margin: 2rem auto;
+  padding: 1rem;
+  background: #f4f5f7;
+  border-radius: 6px;
+}
+
+.add-board-form {
+  display: flex;
+  gap: 0.5rem;
   margin-bottom: 1rem;
+}
+
+.add-board-form input {
+  flex: 1;
+  padding: 0.5rem;
+}
+
+.add-board-form button {
+  background: #0079bf;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
 }
 
 ul {
@@ -9,17 +31,23 @@ ul {
 }
 
 li {
-  background: #f4f5f7;
-  margin-bottom: 0.5rem;
-  padding: 0.5rem;
-  border-radius: 4px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  background: white;
+  margin-bottom: 0.5rem;
+  padding: 0.5rem;
+  border-radius: 4px;
 }
 
-form {
-  margin-top: 1rem;
-  display: flex;
-  gap: 0.5rem;
+.board-title {
+  cursor: pointer;
+}
+
+.delete-btn {
+  background: #eb5a46;
+  color: white;
+  border: none;
+  padding: 0.3rem 0.6rem;
+  border-radius: 4px;
 }

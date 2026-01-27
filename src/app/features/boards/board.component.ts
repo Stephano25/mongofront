@@ -36,4 +36,13 @@ export class BoardComponent implements OnInit {
       });
     }
   }
+
+  deleteBoard() {
+    if (confirm('Supprimer ce board ?')) {
+      this.service.deleteBoard(this.boardId).subscribe(() => {
+        console.log('Board supprimé');
+        // ✅ tu peux rediriger vers la liste des boards
+      });
+    }
+  }
 }

@@ -26,27 +26,27 @@ export class CardComponent implements OnInit {
 
   addCard() {
     if (this.newCardTitle.trim()) {
-      this.service.createCard(this.listId, this.newCardTitle, Date.now()).subscribe(() => {
-        this.vm.load(this.listId);
+      this.service.createCard(this.listId, this.newCardTitle, Date.now()).subscribe(card => {
+        this.vm.addLocal(card); // ✅ mise à jour instantanée
         this.newCardTitle = '';
       });
     }
   }
 
   drop(event: CdkDragDrop<CardModel[]>) {
-    const cards = event.container.data ?? [];
+    const cards: CardModel[] = event.container.data ?? [];
     moveItemInArray(cards, event.previousIndex, event.currentIndex);
 
     this.service.updateCardPositions(this.listId, cards).subscribe(() => {
-      console.log('Positions des cartes mises à jour');
+      this.vm.load(this.listId); // ✅ recharge après drag & drop
     });
   }
 
   deleteCard(id: string) {
     if (confirm('Supprimer cette carte ?')) {
-        this.service.deleteCard(id).subscribe(() => {
-        this.vm.load(this.listId);
-        });
+      this.service.deleteCard(id).subscribe(() => {
+        this.vm.removeLocal(id); // ✅ suppression instantanée
+      });
     }
   }
 }

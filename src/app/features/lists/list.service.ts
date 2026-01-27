@@ -15,10 +15,10 @@ export class ListService {
   }
 
   updateListPositions(boardId: string, lists: ListModel[]) {
-    return this.api.post<any>('/lists/update-positions', { boardId, lists });
+    return this.api.post<{ success: boolean }>('/lists/update-positions', { boardId, lists });
   }
 
   deleteList(id: string) {
-    return this.api.delete(`/lists/${id}`);
+    return this.api.delete<void>(`/lists/${id}`);
   }
 }

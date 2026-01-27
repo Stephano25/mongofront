@@ -1,16 +1,22 @@
-<div
-  cdkDropList
-  [cdkDropListData]="(vm.cards$ | async) || []"
-  class="list-cards"
-  (cdkDropListDropped)="drop($event)"
->
-  <div class="card" *ngFor="let card of vm.cards$ | async" cdkDrag>
-    {{ card.title }}
-    <button (click)="deleteCard(card._id)">Supprimer</button>
+<div class="cards">
+  <h4>Cartes</h4>
+
+  <!-- Formulaire d’ajout -->
+  <form (ngSubmit)="addCard()" #cardForm="ngForm" class="add-card-form">
+    <input [(ngModel)]="newCardTitle" name="title" placeholder="Nom de la carte" required />
+    <button type="submit" [disabled]="cardForm.invalid">+ Ajouter une carte</button>
+  </form>
+
+  <!-- Liste des cartes -->
+  <div
+    cdkDropList
+    [cdkDropListData]="(vm.cards$ | async) || []"
+    class="list-cards"
+    (cdkDropListDropped)="drop($event)"
+  >
+    <div class="card" *ngFor="let card of vm.cards$ | async" cdkDrag>
+      {{ card.title }}
+      <button (click)="deleteCard(card._id)" class="delete-btn">Supprimer</button>
+    </div>
   </div>
 </div>
-
-<form (ngSubmit)="addCard()" #cardForm="ngForm" class="add-card-form">
-  <input [(ngModel)]="newCardTitle" name="title" placeholder="Nom de la carte" required />
-  <button type="submit" [disabled]="cardForm.invalid">+ Ajouter une carte</button>
-</form>

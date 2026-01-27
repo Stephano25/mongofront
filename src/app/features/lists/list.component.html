@@ -1,17 +1,23 @@
-<div
-  cdkDropList
-  [cdkDropListData]="(vm.lists$ | async) || []"
-  class="board-lists"
-  (cdkDropListDropped)="drop($event)"
->
-  <div class="list" *ngFor="let list of vm.lists$ | async" cdkDrag>
-    <h3>{{ list.title }}</h3>
-    <button (click)="deleteList(list._id)">Supprimer</button>
-    <app-cards [listId]="list._id"></app-cards>
+<div class="lists">
+  <h3>Listes</h3>
+
+  <!-- Formulaire d’ajout -->
+  <form (ngSubmit)="addList()" #listForm="ngForm" class="add-list-form">
+    <input [(ngModel)]="newListTitle" name="title" placeholder="Nom de la liste" required />
+    <button type="submit" [disabled]="listForm.invalid">+ Ajouter une liste</button>
+  </form>
+
+  <!-- Liste des listes -->
+  <div
+    cdkDropList
+    [cdkDropListData]="(vm.lists$ | async) || []"
+    class="board-lists"
+    (cdkDropListDropped)="drop($event)"
+  >
+    <div class="list" *ngFor="let list of vm.lists$ | async" cdkDrag>
+      <h4>{{ list.title }}</h4>
+      <button (click)="deleteList(list._id)" class="delete-btn">Supprimer</button>
+      <app-cards [listId]="list._id"></app-cards>
+    </div>
   </div>
 </div>
-
-<form (ngSubmit)="addList()" #listForm="ngForm" class="add-list-form">
-  <input [(ngModel)]="newListTitle" name="title" placeholder="Nom de la liste" required />
-  <button type="submit" [disabled]="listForm.invalid">+ Ajouter une liste</button>
-</form>

@@ -10,7 +10,7 @@ export class BoardService {
     return this.api.get<BoardModel[]>('/boards');
   }
 
-  getBoardById(id: string) {
+  getBoard(id: string) { // ✅ ajout
     return this.api.get<BoardModel>(`/boards/${id}`);
   }
 
@@ -23,6 +23,6 @@ export class BoardService {
   }
 
   deleteBoard(id: string) {
-    return this.api.delete(`/boards/${id}`);
+    return this.api.delete<void>(`/boards/${id}`);
   }
 }

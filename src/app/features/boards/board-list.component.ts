@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { BoardService } from '../boards/board.service';
 import { Router } from '@angular/router';
+import { BoardService } from './board.service';
+import { BoardModel } from './board.model';
 
 @Component({
   selector: 'app-board-list',
@@ -12,13 +13,15 @@ import { Router } from '@angular/router';
   styleUrls: ['./board-list.component.css']
 })
 export class BoardListComponent implements OnInit {
-  boards: { _id: string; title: string }[] = [];
+  boards: BoardModel[] = [];
   newBoardTitle = '';
 
   constructor(private service: BoardService, private router: Router) {}
 
   ngOnInit() {
-    this.service.getBoards().subscribe(data => (this.boards = data));
+    this.service.getBoards().subscribe((data: BoardModel[]) => {
+      this.boards = data;
+    });
   }
 
   open(id: string) {
@@ -27,8 +30,8 @@ export class BoardListComponent implements OnInit {
 
   createBoard() {
     if (this.newBoardTitle.trim()) {
-      this.service.createBoard(this.newBoardTitle).subscribe(board => {
-        this.boards.push(board);
+      this.service.createBoard(this.newBoardTitle).subscribe((board: BoardModel) => {
+        this.boards.push(board); // ✅ ajout instantané
         this.newBoardTitle = '';
         this.router.navigate(['/boards', board._id]);
       });
@@ -38,7 +41,7 @@ export class BoardListComponent implements OnInit {
   deleteBoard(id: string) {
     if (confirm('Supprimer ce board ?')) {
       this.service.deleteBoard(id).subscribe(() => {
-        this.boards = this.boards.filter(b => b._id !== id);
+        this.boards = this.boards.filter(b => b._id !== id); // ✅ suppression instantanée
       });
     }
   }

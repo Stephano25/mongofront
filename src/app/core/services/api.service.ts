@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 
 @Injectable({ providedIn: 'root' })
 export class ApiService {
-  private readonly baseUrl = 'http://localhost:3000'; // ✅ corriger ici
+  private readonly baseUrl = 'http://localhost:3000'; // ✅ backend NestJS
 
   constructor(private http: HttpClient) {}
 
