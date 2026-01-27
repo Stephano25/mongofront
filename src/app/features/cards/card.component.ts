@@ -34,12 +34,19 @@ export class CardComponent implements OnInit {
   }
 
   drop(event: CdkDragDrop<CardModel[]>) {
-    const cards = event.container.data ?? []; // ✅ évite null
+    const cards = event.container.data ?? [];
     moveItemInArray(cards, event.previousIndex, event.currentIndex);
 
-    // ✅ Sauvegarde côté backend
     this.service.updateCardPositions(this.listId, cards).subscribe(() => {
-      console.log('Positions mises à jour');
+      console.log('Positions des cartes mises à jour');
     });
+  }
+
+  deleteCard(id: string) {
+    if (confirm('Supprimer cette carte ?')) {
+        this.service.deleteCard(id).subscribe(() => {
+        this.vm.load(this.listId);
+        });
+    }
   }
 }

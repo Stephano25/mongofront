@@ -42,4 +42,12 @@ export class ListComponent implements OnInit {
       console.log('Positions des listes mises à jour');
     });
   }
+
+  deleteList(id: string) {
+    if (confirm('Supprimer cette liste ?')) {
+        this.service.deleteList(id).subscribe(() => {
+        this.vm.load(this.boardId);
+        });
+    }
+ }
 }

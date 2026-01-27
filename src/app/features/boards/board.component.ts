@@ -1,27 +1,39 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { BoardViewModel } from './board.viewmodel';
 import { ListComponent } from '../lists/list.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { BoardService } from './board.service';
 
 @Component({
   selector: 'app-board',
   standalone: true,
-  imports: [CommonModule, ListComponent, DragDropModule],
+  imports: [CommonModule, FormsModule, ListComponent, DragDropModule],
   templateUrl: './board.component.html',
   styleUrls: ['./board.component.css'],
   providers: [BoardViewModel],
 })
 export class BoardComponent implements OnInit {
   boardId!: string;
+  newTitle = '';
 
-  constructor(public vm: BoardViewModel, private route: ActivatedRoute) {}
+  constructor(public vm: BoardViewModel, private route: ActivatedRoute, private service: BoardService) {}
 
   ngOnInit() {
     this.route.params.subscribe(params => {
       this.boardId = params['id'] as string;
       this.vm.loadBoard(this.boardId);
     });
+  }
+
+  renameBoard() {
+    if (this.newTitle.trim()) {
+      this.service.updateBoard(this.boardId, this.newTitle).subscribe(() => {
+        this.vm.loadBoard(this.boardId);
+        this.newTitle = '';
+      });
+    }
   }
 }

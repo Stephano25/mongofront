@@ -1,4 +1,12 @@
-<div *ngIf="vm.board$ | async as board">
-  <h2>{{ board?.title }}</h2>
-  <app-lists [boardId]="board?._id"></app-lists>
+<div class="board-header">
+  <h2>{{ (vm.board$ | async)?.title }}</h2>
+
+  <form (ngSubmit)="renameBoard()" #renameForm="ngForm">
+    <input [(ngModel)]="newTitle" name="title" placeholder="Nouveau nom du board" required />
+    <button type="submit" [disabled]="renameForm.invalid">Renommer</button>
+  </form>
+</div>
+
+<div class="board-content">
+  <app-lists [boardId]="boardId"></app-lists>
 </div>

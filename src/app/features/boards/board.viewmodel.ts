@@ -9,7 +9,7 @@ export class BoardViewModel {
 
   constructor(private service: BoardService) {}
 
-  load(id: string) {
-    this.board$ = this.service.getBoardById(id); // ✅ maintenant reconnu
+  loadBoard(id: string) {
+    this.board$ = this.service.getBoardById(id);
   }
 }

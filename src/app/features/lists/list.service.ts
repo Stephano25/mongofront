@@ -17,4 +17,8 @@ export class ListService {
   updateListPositions(boardId: string, lists: ListModel[]) {
     return this.api.post<any>('/lists/update-positions', { boardId, lists });
   }
+
+  deleteList(id: string) {
+    return this.api.delete(`/lists/${id}`);
+  }
 }

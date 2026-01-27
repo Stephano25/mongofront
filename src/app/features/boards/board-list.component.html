@@ -1,11 +1,13 @@
 <h2>Mes Boards</h2>
 <ul>
-  <li *ngFor="let board of boards" (click)="open(board._id)">
+  <li *ngFor="let board of boards">
     {{ board.title }}
+    <button (click)="open(board._id)">Ouvrir</button>
+    <button (click)="deleteBoard(board._id)">Supprimer</button>
   </li>
 </ul>
 
-<form (ngSubmit)="createBoard()">
-  <input [(ngModel)]="newBoardTitle" name="title" placeholder="Nom du board" required />
-  <button type="submit">+ Nouveau board</button>
+<form (ngSubmit)="createBoard()" #boardForm="ngForm">
+  <input [(ngModel)]="newBoardTitle" name="title" required placeholder="Nom du board" />
+  <button type="submit" [disabled]="boardForm.invalid">+ Nouveau board</button>
 </form>

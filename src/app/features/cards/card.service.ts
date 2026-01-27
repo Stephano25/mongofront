@@ -17,4 +17,8 @@ export class CardService {
   updateCardPositions(listId: string, cards: CardModel[]) {
     return this.api.post<any>('/cards/update-positions', { listId, cards });
   }
+
+  deleteCard(id: string) {
+    return this.api.delete(`/cards/${id}`);
+}
 }

@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ListService } from './list.service';
-import { I } from '@angular/cdk/keycodes';
 import { ListModel } from './list.model';
 
 @Injectable()

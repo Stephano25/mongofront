@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from '../../core/services/api.service';
-import { BoardModel } from '../boards/board.model';
+import { BoardModel } from './board.model';
 
-@Injectable({ providedIn: 'root' }) // ✅ injection globale
+@Injectable({ providedIn: 'root' })
 export class BoardService {
   constructor(private api: ApiService) {}
 
@@ -10,11 +10,19 @@ export class BoardService {
     return this.api.get<BoardModel[]>('/boards');
   }
 
+  getBoardById(id: string) {
+    return this.api.get<BoardModel>(`/boards/${id}`);
+  }
+
   createBoard(title: string) {
     return this.api.post<BoardModel>('/boards', { title });
   }
 
-  getBoardById(id: string) {
-    return this.api.get<BoardModel>(`/boards/${id}`);
+  updateBoard(id: string, title: string) {
+    return this.api.put<BoardModel>(`/boards/${id}`, { title });
+  }
+
+  deleteBoard(id: string) {
+    return this.api.delete(`/boards/${id}`);
   }
 }
