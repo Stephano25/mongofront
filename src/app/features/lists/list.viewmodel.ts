@@ -4,10 +4,11 @@ import { ListModel, ListService } from './list.service';
 
 @Injectable()
 export class ListViewModel {
-    lists$!: Observable<ListModel[]>;
+  lists$!: Observable<ListModel[]>;
 
-    constructor(private service: ListService) {}
-    load(boardId: string) {
-        this.lists$ = this.service.getLists(boardId);
-    }
+  constructor(private service: ListService) {}
+
+  load(boardId: string) {
+    this.lists$ = this.service.getLists(boardId);
+  }
 }
