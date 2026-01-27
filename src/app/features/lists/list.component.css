@@ -1,50 +1,168 @@
 .lists {
-  margin-top: 1rem;
+  padding: 2rem;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.lists h3 {
+  color: #2d3748;
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  text-align: center;
 }
 
 .add-list-form {
   display: flex;
-  gap: 0.5rem;
-  margin-bottom: 1rem;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  padding: 1.25rem;
+  background: #f7fafc;
+  border-radius: 8px;
+  border: 2px dashed #cbd5e0;
 }
 
 .add-list-form input {
   flex: 1;
-  padding: 0.5rem;
-  border: 1px solid #dfe1e6;
-  border-radius: 4px;
+  padding: 0.875rem 1.25rem;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 1rem;
+  background: #ffffff;
+  transition: all 0.3s ease;
+}
+
+.add-list-form input:focus {
+  outline: none;
+  border-color: #805ad5;
+  box-shadow: 0 0 0 3px rgba(128, 90, 213, 0.1);
 }
 
 .add-list-form button {
-  background: #0079bf;
-  color: white;
+  padding: 0.875rem 2rem;
+  background: #805ad5;
+  color: #ffffff;
   border: none;
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
   cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.add-list-form button:hover:not(:disabled) {
+  background: #6b46c1;
+  transform: translateY(-1px);
+}
+
+.add-list-form button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 .board-lists {
   display: flex;
-  gap: 1rem;
+  gap: 1.5rem;
+  overflow-x: auto;
+  padding-bottom: 1rem;
+  min-height: 400px;
+}
+
+.board-lists::-webkit-scrollbar {
+  height: 8px;
+}
+
+.board-lists::-webkit-scrollbar-track {
+  background: #e2e8f0;
+  border-radius: 4px;
+}
+
+.board-lists::-webkit-scrollbar-thumb {
+  background: #a0aec0;
+  border-radius: 4px;
+}
+
+.board-lists::-webkit-scrollbar-thumb:hover {
+  background: #718096;
 }
 
 .list {
-  background: white;
-  padding: 0.5rem;
-  border-radius: 4px;
-  min-width: 200px;
+  flex: 0 0 320px;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  cursor: move;
+  transition: all 0.3s ease;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.list:hover {
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  transform: translateY(-4px);
 }
 
 .list h4 {
-  margin: 0 0 0.5rem 0;
+  color: #ffffff;
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.2);
 }
 
-.delete-btn {
-  background: #eb5a46;
-  color: white;
+.list .delete-btn {
+  width: 100%;
+  padding: 0.625rem;
+  background: rgba(245, 101, 101, 0.9);
+  color: #ffffff;
   border: none;
-  padding: 0.3rem 0.6rem;
-  border-radius: 4px;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  font-weight: 600;
   cursor: pointer;
+  transition: all 0.3s ease;
+  margin-bottom: 1rem;
+}
+
+.list .delete-btn:hover {
+  background: #f56565;
+  transform: scale(1.02);
+}
+
+.cdk-drag-preview.list {
+  opacity: 0.8;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3);
+  transform: rotate(2deg);
+}
+
+.cdk-drag-placeholder.list {
+  opacity: 0.3;
+  background: #cbd5e0;
+  border: 2px dashed #a0aec0;
+}
+
+.cdk-drag-animating {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.board-lists.cdk-drop-list-dragging .list:not(.cdk-drag-placeholder) {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+@media (max-width: 768px) {
+  .board-lists {
+    flex-direction: column;
+  }
+  
+  .list {
+    flex: 1 1 auto;
+  }
+  
+  .add-list-form {
+    flex-direction: column;
+  }
 }

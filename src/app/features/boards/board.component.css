@@ -1,53 +1,120 @@
 .board {
-  max-width: 800px;
+  max-width: 1400px;
   margin: 2rem auto;
-  padding: 1rem;
-  background: #f4f5f7;
-  border-radius: 6px;
+  padding: 2rem;
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  border-radius: 16px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+  min-height: calc(100vh - 4rem);
+}
+
+.board h2 {
+  color: #ffffff;
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+  text-align: center;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .rename-board-form {
   display: flex;
-  gap: 0.5rem;
-  margin-bottom: 1rem;
+  gap: 1rem;
+  max-width: 600px;
+  margin: 0 auto 2rem;
+  padding: 1.5rem;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .rename-board-form input {
   flex: 1;
-  padding: 0.5rem;
-  border: 1px solid #dfe1e6;
-  border-radius: 4px;
+  padding: 0.875rem 1.25rem;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.rename-board-form input:focus {
+  outline: none;
+  border-color: #f5576c;
+  box-shadow: 0 0 0 3px rgba(245, 87, 108, 0.1);
 }
 
 .rename-board-form button {
-  background: #0079bf;
-  color: white;
+  padding: 0.875rem 2rem;
+  background: #f5576c;
+  color: #ffffff;
   border: none;
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
   cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.rename-board-form button:hover:not(:disabled) {
+  background: #e4466b;
+  transform: translateY(-1px);
+}
+
+.rename-board-form button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 .board-actions {
   display: flex;
-  gap: 0.5rem;
-  margin-bottom: 1rem;
+  gap: 1rem;
+  justify-content: center;
+  margin-bottom: 2rem;
 }
 
-.delete-btn {
-  background: #eb5a46;
-  color: white;
+.board-actions button {
+  padding: 0.875rem 2rem;
   border: none;
-  padding: 0.4rem 0.8rem;
-  border-radius: 4px;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
   cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 .back-btn {
-  background: #5aac44;
-  color: white;
-  border: none;
-  padding: 0.4rem 0.8rem;
-  border-radius: 4px;
-  cursor: pointer;
+  background: #ffffff;
+  color: #f5576c;
+}
+
+.back-btn:hover {
+  background: #f8f9ff;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+.delete-btn {
+  background: #e53e3e;
+  color: #ffffff;
+}
+
+.delete-btn:hover {
+  background: #c53030;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(229, 62, 62, 0.3);
+}
+
+@media (max-width: 768px) {
+  .board {
+    padding: 1rem;
+  }
+  
+  .board-actions {
+    flex-direction: column;
+  }
+  
+  .rename-board-form {
+    flex-direction: column;
+  }
 }

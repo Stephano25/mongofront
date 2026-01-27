@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { BoardService } from './board.service';
 import { BoardModel } from './board.model';
-import { AuthService } from '../../core/services/auth.service'; // ✅ import ajouté
+import { AuthService } from '../../core/services/auth.service';
 
 @Component({
   selector: 'app-board-list',
@@ -17,10 +17,15 @@ export class BoardListComponent implements OnInit {
   boards: BoardModel[] = [];
   newBoardTitle = '';
 
+  // ✅ propriétés manquantes
+  showAddForm = false;
+  renamingBoardId: string | null = null;
+  renameTitle = '';
+
   constructor(
     private service: BoardService,
     private router: Router,
-    private auth: AuthService // ✅ injection ajoutée
+    private auth: AuthService
   ) {}
 
   ngOnInit() {
@@ -33,12 +38,32 @@ export class BoardListComponent implements OnInit {
     this.router.navigate(['/boards', id]);
   }
 
+  toggleAddForm() {
+    this.showAddForm = !this.showAddForm;
+  }
+
   createBoard() {
     if (this.newBoardTitle.trim()) {
       this.service.createBoard(this.newBoardTitle).subscribe((board: BoardModel) => {
         this.boards.push(board);
         this.newBoardTitle = '';
-        this.router.navigate(['/boards', board._id]);
+        this.showAddForm = false;
+      });
+    }
+  }
+
+  startRename(board: BoardModel) {
+    this.renamingBoardId = board._id;
+    this.renameTitle = board.title;
+  }
+
+  renameBoard(id: string) {
+    if (this.renameTitle.trim()) {
+      this.service.updateBoard(id, this.renameTitle).subscribe((updated: BoardModel) => {
+        const index = this.boards.findIndex(b => b._id === id);
+        if (index !== -1) this.boards[index] = updated;
+        this.renamingBoardId = null;
+        this.renameTitle = '';
       });
     }
   }
@@ -52,6 +77,6 @@ export class BoardListComponent implements OnInit {
   }
 
   logout() {
-    this.auth.logout(); // ✅ fonctionne maintenant
+    this.auth.logout();
   }
 }
