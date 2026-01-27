@@ -1,12 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from '../../core/services/api.service';
-
-export interface CardModel {
-  _id: string;
-  title: string;
-  listId: string;
-  position: number;
-}
+import { CardModel } from './card.model';
 
 @Injectable({ providedIn: 'root' })
 export class CardService {
@@ -18,5 +12,9 @@ export class CardService {
 
   createCard(listId: string, title: string, position: number) {
     return this.api.post<CardModel>('/cards', { listId, title, position });
+  }
+
+  updateCardPositions(listId: string, cards: CardModel[]) {
+    return this.api.post<any>('/cards/update-positions', { listId, cards });
   }
 }

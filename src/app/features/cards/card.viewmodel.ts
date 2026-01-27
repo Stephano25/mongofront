@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { CardModel, CardService } from './card.service';
+import { CardService } from './card.service';
+import { CardModel } from './card.model';
 
 @Injectable()
 export class CardViewModel {
