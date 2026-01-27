@@ -3,11 +3,13 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../core/services/auth.service';
 import { Router } from '@angular/router';
+import { BoardService } from '../../features/boards/board-page/board.service';
 
 @Component({
   selector: 'app-login',
   standalone: true,
   imports: [CommonModule, FormsModule],
+  providers: [BoardService],
   template: `
     <h2>Login</h2>
     <form (ngSubmit)="login()">
@@ -26,17 +28,22 @@ export class LoginComponent {
   email = '';
   password = '';
 
-  constructor(private auth: AuthService, private router: Router) {}
+  
+    constructor(private auth: AuthService, private router: Router, private boardService: BoardService) {}
 
-  login() {
-    this.auth.login(this.email, this.password).subscribe(res => {
-      localStorage.setItem('token', res.access_token);
+ login() {
+  this.auth.login(this.email, this.password).subscribe(res => {
+    localStorage.setItem('token', res.access_token);
 
-      // 👉 Ici tu peux récupérer l’ID du board par défaut
-      // Pour l’exemple, on redirige vers le premier board (id fictif)
-      this.router.navigate(['/boards', 'defaultBoardId']);
+    this.boardService.getBoards().subscribe(boards => {
+      if (boards.length > 0) {
+        this.router.navigate(['/boards', boards[0]._id]); // ✅ vers le premier board
+      } else {
+        alert('Aucun board trouvé.');
+      }
     });
-  }
+  });
+}
 
   goToRegister() {
     this.router.navigate(['/register']);
