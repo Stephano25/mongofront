@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { BoardViewModel } from './board.viewmodel';
-import { ListComponent } from '../../lists/list.component';
+import { ListComponent } from '../lists/list.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 
 @Component({

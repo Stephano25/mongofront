@@ -1,6 +1,13 @@
-<div class="list" *ngFor="let list of vm.lists$ | async">
-  <h3>{{ list.title }}</h3>
-  <app-cards [listId]="list._id"></app-cards>
+<div
+  cdkDropList
+  [cdkDropListData]="(vm.lists$ | async) || []"
+  class="board"
+  (cdkDropListDropped)="drop($event)"
+>
+  <div class="list" *ngFor="let list of vm.lists$ | async" cdkDrag>
+    <h3>{{ list.title }}</h3>
+    <app-cards [listId]="list._id"></app-cards>
+  </div>
 </div>
 
 <form (ngSubmit)="addList()">

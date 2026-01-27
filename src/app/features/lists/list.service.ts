@@ -1,12 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from '../../core/services/api.service';
-
-export interface ListModel {
-  _id: string;
-  title: string;
-  boardId: string;
-  position: number;
-}
+import { ListModel } from './list.model';
 
 @Injectable({ providedIn: 'root' })
 export class ListService {
@@ -18,5 +12,9 @@ export class ListService {
 
   createList(boardId: string, title: string, position: number) {
     return this.api.post<ListModel>('/lists', { boardId, title, position });
+  }
+
+  updateListPositions(boardId: string, lists: ListModel[]) {
+    return this.api.post<any>('/lists/update-positions', { boardId, lists });
   }
 }
