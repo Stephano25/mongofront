@@ -14,6 +14,7 @@ import { Router } from '@angular/router';
         {{ board.title }}
       </li>
     </ul>
+    <button (click)="createBoard()">+ Nouveau board</button>
   `,
   providers: [BoardService]
 })
@@ -28,5 +29,14 @@ export class BoardListComponent implements OnInit {
 
   open(id: string) {
     this.router.navigate(['/boards', id]);
+  }
+
+  createBoard() {
+    const title = prompt('Nom du nouveau board :');
+    if (title?.trim()) {
+      this.service.createBoard(title).subscribe((board: { _id: string; title: string }) => {
+        this.router.navigate(['/boards', board._id]);
+      });
+    }
   }
 }

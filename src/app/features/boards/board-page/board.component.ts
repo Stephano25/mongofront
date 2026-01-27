@@ -10,7 +10,7 @@ import { ListComponent } from '../../lists/list.component';
   standalone: true,
   imports: [CommonModule, ListComponent],
   templateUrl: './board.component.html',
-  providers: [BoardViewModel, BoardService],
+  providers: [BoardViewModel],
 })
 export class BoardComponent implements OnInit {
   boardId!: string;

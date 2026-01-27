@@ -1,11 +1,13 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from '../../../core/services/api.service';
 
-@Injectable({
-  providedIn: 'root'   // ✅ rend le service disponible partout
-})
+@Injectable({ providedIn: 'root' })
 export class BoardService {
   constructor(private api: ApiService) {}
+
+  createBoard(title: string) {
+    return this.api.post<any>('/boards', { title });
+  }
 
   getBoards() {
     return this.api.get<any[]>('/boards');
