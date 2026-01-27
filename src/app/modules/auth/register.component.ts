@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../core/services/auth.service';
+import { Router } from '@angular/router'
 
 @Component({
   selector: 'app-register',
@@ -14,17 +15,24 @@ import { AuthService } from '../../core/services/auth.service';
       <input [(ngModel)]="password" name="password" type="password" placeholder="Password" required />
       <button type="submit">Register</button>
     </form>
+
+    <p>
+      Déjà inscrit ?
+      <button (click)="goToLogin()">Se connecter</button>
+    </p>
   `
+
 })
 export class RegisterComponent {
   email = '';
   password = '';
 
-  constructor(private auth: AuthService) {}
+  constructor(private auth: AuthService, private router: Router) {}
 
   register() {
     this.auth.register(this.email, this.password).subscribe(() => {
       alert('User registered!');
     });
   }
+  goToLogin() { this.router.navigate(['/login']); }
 }
