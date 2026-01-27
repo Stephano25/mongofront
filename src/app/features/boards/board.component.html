@@ -7,8 +7,11 @@
     <button type="submit" [disabled]="renameForm.invalid">Renommer</button>
   </form>
 
-  <!-- Bouton de suppression -->
-  <button (click)="deleteBoard()" class="delete-btn">Supprimer ce board</button>
+  <!-- Boutons d’action -->
+  <div class="board-actions">
+    <button (click)="deleteBoard()" class="delete-btn">Supprimer ce board</button>
+    <button (click)="goBack()" class="back-btn">← Retour à la liste</button>
+  </div>
 
   <!-- Les listes du board -->
   <app-lists [boardId]="boardId"></app-lists>

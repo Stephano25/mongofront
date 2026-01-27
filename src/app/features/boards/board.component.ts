@@ -6,6 +6,7 @@ import { BoardViewModel } from './board.viewmodel';
 import { ListComponent } from '../lists/list.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { BoardService } from './board.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-board',
@@ -19,7 +20,11 @@ export class BoardComponent implements OnInit {
   boardId!: string;
   newTitle = '';
 
-  constructor(public vm: BoardViewModel, private route: ActivatedRoute, private service: BoardService) {}
+  constructor(
+    public vm: BoardViewModel, 
+    private route: ActivatedRoute, 
+    private service: BoardService,
+    private router: Router) {}
 
   ngOnInit() {
     this.route.params.subscribe(params => {
@@ -41,8 +46,11 @@ export class BoardComponent implements OnInit {
     if (confirm('Supprimer ce board ?')) {
       this.service.deleteBoard(this.boardId).subscribe(() => {
         console.log('Board supprimé');
-        // ✅ tu peux rediriger vers la liste des boards
+        this.router.navigate(['/']); // ✅ retour à la liste après suppression
       });
     }
+  }
+  goBack() { 
+    this.router.navigate(['/']); // ✅ bouton retour 
   }
 }

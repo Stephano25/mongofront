@@ -11,6 +11,7 @@
   <ul>
     <li *ngFor="let board of boards">
       <span (click)="open(board._id)" class="board-title">{{ board.title }}</span>
+      <button (click)="open(board._id)" class="open-btn">Ouvrir</button>
       <button (click)="deleteBoard(board._id)" class="delete-btn">Supprimer</button>
     </li>
   </ul>
