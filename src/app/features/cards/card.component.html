@@ -1,0 +1,8 @@
+<div class="card" *ngFor="let card of vm.cards$ | async">
+  {{ card.title }}
+</div>
+
+<form (ngSubmit)="addCard()">
+  <input [(ngModel)]="newCardTitle" name="title" placeholder="Nom de la carte" required />
+  <button type="submit">+ Ajouter une carte</button>
+</form>

@@ -1,0 +1,9 @@
+<div class="list" *ngFor="let list of vm.lists$ | async">
+  <h3>{{ list.title }}</h3>
+  <app-cards [listId]="list._id"></app-cards>
+</div>
+
+<form (ngSubmit)="addList()">
+  <input [(ngModel)]="newListTitle" name="title" placeholder="Nom de la liste" required />
+  <button type="submit">+ Ajouter une liste</button>
+</form>

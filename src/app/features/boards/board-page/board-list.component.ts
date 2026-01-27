@@ -1,25 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { BoardService } from './board.service';
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-board-list',
   standalone: true,
-  imports: [CommonModule],
-  template: `
-    <h2>Mes Boards</h2>
-    <ul>
-      <li *ngFor="let board of boards" (click)="open(board._id)">
-        {{ board.title }}
-      </li>
-    </ul>
-    <button (click)="createBoard()">+ Nouveau board</button>
-  `,
-  providers: [BoardService]
+  imports: [CommonModule, FormsModule],
+  templateUrl: './board-list.component.html',
 })
 export class BoardListComponent implements OnInit {
-  boards: any[] = [];
+  boards: { _id: string; title: string }[] = [];
+  newBoardTitle = '';
 
   constructor(private service: BoardService, private router: Router) {}
 
@@ -32,9 +25,10 @@ export class BoardListComponent implements OnInit {
   }
 
   createBoard() {
-    const title = prompt('Nom du nouveau board :');
-    if (title?.trim()) {
-      this.service.createBoard(title).subscribe((board: { _id: string; title: string }) => {
+    if (this.newBoardTitle.trim()) {
+      this.service.createBoard(this.newBoardTitle).subscribe(board => {
+        this.boards.push(board);
+        this.newBoardTitle = '';
         this.router.navigate(['/boards', board._id]);
       });
     }
