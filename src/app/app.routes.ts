@@ -9,7 +9,7 @@ export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'boards', component: BoardListComponent, canActivate: [AuthGuard] }, // ✅ protégé
-  { path: 'boards/:id', component: BoardComponent, canActivate: [AuthGuard] }, // ✅ protégé
+  { path: 'boards', component: BoardListComponent, canActivate: [AuthGuard] },
+  { path: 'boards/:id', component: BoardComponent, canActivate: [AuthGuard] },
   { path: '**', redirectTo: 'login' }
 ];
